@@ -1,6 +1,6 @@
 {
   "name": "@indra.ai/telnetdeva",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The Telnet Deva",
   "main": "index.js",
   "scripts": {
