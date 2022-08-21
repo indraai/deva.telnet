@@ -1,6 +1,6 @@
 # Telnet Help
 
-The Telnet Deva is for connecting to remote telnet hosts through teh interface. There are a few commands you can use like 'open, close, write/>, cmd, uid, start, stop, status, and help'.
+The Telnet Deva is for connecting to remote telnet hosts through the interface. There are a few commands you can use like 'open, close, write/>, cmd, uid, start, stop, status, and help'.
 
 
 ## Open
