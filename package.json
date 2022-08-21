@@ -1,0 +1,23 @@
+{
+  "name": "@indra.ai/telnetdeva",
+  "version": "0.0.1",
+  "description": "The Telnet Deva",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/indraai/TelnetDeva.git"
+  },
+  "keywords": [
+    "Telnet",
+    "Deva"
+  ],
+  "author": "Quinn Michaels",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/indraai/TelnetDeva/issues"
+  },
+  "homepage": "https://github.com/indraai/TelnetDeva#readme"
+}
