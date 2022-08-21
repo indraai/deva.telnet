@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/indraai/TelnetDeva/issues"
   },
+  "dependencies": {
+    "telnet-stream": "^1.0.5"
+  },
   "homepage": "https://github.com/indraai/TelnetDeva#readme"
 }
