@@ -18,18 +18,16 @@ const TELNET = new Deva({
     voice: agent.voice,
     profile: agent.profile,
     translate(input) {
-      return input.trim()
-        .replace(/(\b)smash(\b)/g, '$1kill$2')
-        .replace(/(\b)smash(\b)/g, '$1Killf$2')
-        .replace(/(\b)Loozer(\b)/g, '$1Corpse$2')
-        .replace(/(\b)loozer(\b)/g, '$1corpse$2')
-        .replace(/(\b)offering(\b)/g, '$1sacrifice$2')
-        .replace(/(\b)Offering(\b)/g, '$1Sacrifice$2')
-        .replace(/(\b)autogift(\b)/g, '$1autosac$2') + '\n\r';
-
+      return input.trim();
     },
-    parse(input) {
 
+    /**************
+    func: parse
+    params: input
+    describe: The Agent parse function cleans up the text that is returned
+    from the telnet server for proper display in the terminal.
+    ***************/
+    parse(input) {
       const ansipattern = [
       		'[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]+)*|[a-zA-Z\\d]+(?:;[-a-zA-Z\\d\\/#&.:=?%@~_]*)*)?\\u0007)',
       		'(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-nq-uy=><~]))'
@@ -38,18 +36,9 @@ const TELNET = new Deva({
       const ansireg = new RegExp(ansipattern, 'g');
 
       // html ansi colors
-      input = input.toString('utf8')
-        .replace(/(<)(.+?)(>)/g, '[$2]')
-        .replace(/(\b)kill(\b)/g, '$1smash$2')
-        .replace(/(\b)Kill(\b)/g, '$1Smash$2')
-        .replace(/(\b)Corpse(\b)/g, '$1Body$2')
-        .replace(/(\b)corpse(\b)/g, '$1body$2')
-        .replace(/(\b)DEAD(\b)/g, '$1BEATEN$2')
-        .replace(/(\b)sacrifice(\b)/g, '$1offering$2')
-        .replace(/(\b)Sacrifice(\b)/g, '$1Offering$2')
-        .replace(/(\b)autosac(\b)/g, '$1autogift$2').replace(ansireg, '');
-
-      return input;
+      return input.toString('utf8')
+        .replace(/(<)(.+?)(>)/g, '[$2]') // replace angle brackets with square.
+        .replace(ansireg, ''); // remove ansi colors.
     }
   },
   vars,
@@ -57,12 +46,23 @@ const TELNET = new Deva({
   listeners: {},
   modules: {},
   func: {
+    /**************
+    func: state
+    params: st, connection
+    describe: Sets the state of the specific connection.
+    ***************/
     state(st, connection) {
       const conn = this.modules[connection];
       if (st === 'done') conn.pending = false;
       conn.state = this.vars.states[st];
       // this.prompt(this.vars.state);
     },
+
+    /**************
+    func: open
+    params: packet
+    describe: Open a new Telnet connection with the packet parameters.
+    ***************/
     open(packet) {
       const {id, q, created} = packet;
       // so here we need a name which is going to be param 1
@@ -137,6 +137,11 @@ const TELNET = new Deva({
       });
     },
 
+    /**************
+    func: close
+    params: connection
+    describe: Close a specific telnet connection.
+    ***************/
     close(connection = false) {
       connection = connection ? connection : this.vars.connection;
       this.func.state('close', connection);
@@ -145,6 +150,12 @@ const TELNET = new Deva({
       return `${this.vars.messages.close} - ${connection}`;
     },
 
+    /**************
+    func: write
+    params: packet
+    describe: Write to a specific telnet connection with the provided packet
+    data.
+    ***************/
     write(packet) {
       const {text,meta} = packet.q;
       if (meta.params[1]) this.vars.connection = meta.params[1];
@@ -159,11 +170,22 @@ const TELNET = new Deva({
       });
     },
 
+    /**************
+    func: cmd
+    params: packet
+    describe: Send a command to the specificed telnet connection
+    ***************/
     cmd(packet) {
       const connection = packet.q.meta.params[1] ? packet.q.meta.params[1] : this.vars.connection;
       return Promise.resolve(this.modules[connection].telnet.writeCommand(text));
     },
 
+    /**************
+    func: onData
+    params: packet
+    describe: The onData function is the handler that deals with data that is
+    recieved from the telnet connection.
+    ***************/
     onData(text, connection) {
       if (!text.length) return;
       this.func.state('data', connection);
@@ -200,6 +222,13 @@ const TELNET = new Deva({
     onDo(data, connection) {},
     onDont(data, connection) {},
     onSub(data, connection) {},
+
+    /**************
+    func: onError
+    params: err, connection
+    describe: The specific onError handler for the Telnet connection and NOT
+    for the overall DEVA. This is for specific connections only.
+    ***************/
     onError(err, connection) {
       this.func.state('error', connection);
       const {relayEvent, pending} = this.modules[connection]
@@ -231,39 +260,104 @@ const TELNET = new Deva({
         created: Date.now()
       })
     },
+
+    /**************
+    func: onClose
+    params: data, connection
+    describe: The onClose event handler for when a telnet connection is closed.
+    ***************/
     onClose(data, connection) {
       this.prompt(this.vars.messages.close);
     },
+
+    /**************
+    func: onEnd
+    params: data, connection
+    describe: The onEnd handler is triggered when a telnet connection ends.
+    ***************/
     onEnd(data, connection) {
       this.prompt(this.vars.messages.end);
     },
+
+    /**************
+    func: onDestroy
+    params: data, connection
+    describe: The onDestroy handler is triggered when a connection is destroyed.
+    ***************/
     onDestroy(data, connection) {
       this.prompt(this.vars.messages.destroy);
     },
   },
   methods: {
+    /**************
+    method: open
+    params: packet
+    describe: Method relay to the open function.
+    ***************/
     open(packet) {
       return this.func.open(packet);
     },
+
+    /**************
+    method: close
+    params: packet
+    describe: Close a specific telnet connection.
+    ***************/
     close(packet) {
       const text = this.func.close(packet.q.text);
       return Promise.resolve({text});
     },
+
+    /**************
+    method: write
+    params: packet
+    describe: Method relay to the write function.
+    ***************/
     write(packet) {
       return this.func.write(packet);
     },
+
+    /**************
+    method: >
+    params: packet
+    describe: Shortcut method to the write function.
+    ***************/
     '>'(packet) {
       return this.func.write(packet);
     },
+
+    /**************
+    method: cmd
+    params: packet
+    describe: Method relay to the cmd function.
+    ***************/
     cmd(packet) {
       return this.func.cmd(packet);
     },
+
+    /**************
+    method: uid
+    params: packet
+    describe: Return a unique id from the core module.
+    ***************/
     uid(packet) {
-      return Promise.resolve(this.uid());
+      return Promise.resolve({text:this.uid()});
     },
+
+    /**************
+    method: status
+    params: packet
+    describe: Return the status for the Telnet Deva.
+    ***************/
     status(packet) {
       return this.status();
     },
+
+    /**************
+    method: help
+    params: packet
+    describe: Return the help files for the Telnet Deva.
+    ***************/
     help(packet) {
       return new Promise((resolve, reject) => {
         this.lib.help(packet.q.text, __dirname).then(help => {
