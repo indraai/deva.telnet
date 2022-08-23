@@ -20,7 +20,7 @@
     "url": "https://github.com/indraai/TelnetDeva/issues"
   },
   "dependencies": {
-    "@indra.ai/deva": "^1.0.25",
+    "@feecting/deva": "^1.0.25",
     "telnet-stream": "^1.0.5"
   },
   "homepage": "https://github.com/indraai/TelnetDeva#readme"
