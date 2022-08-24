@@ -159,10 +159,14 @@ const TELNET = new Deva({
     write(packet) {
       const {text,meta} = packet.q;
       if (meta.params[1]) this.vars.connection = meta.params[1];
+      const conn = this.modules[this.vars.connection].telnet
+
+      console.log('WRITING WRITING WRITING WRITING');
+      conn.write(`player`)
       return new Promise((resolve, reject) => {
         if (!this.modules[this.vars.connection]) return resolve(this.vars.messages.noconnect);
         this.func.state('write', this.vars.connection);
-        this.modules[this.vars.connection].telnet.write(this.agent.translate(text), () => {
+        conn.write(this.agent.translate(text), () => {
           this.modules[this.vars.connection].pending = packet.q;
           this.func.state('pending', this.vars.connection);
           return resolve();
