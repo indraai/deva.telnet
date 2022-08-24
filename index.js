@@ -18,8 +18,7 @@ const TELNET = new Deva({
     voice: agent.voice,
     profile: agent.profile,
     translate(input) {
-      console.log('TRANSLATE STOP', input);
-      return input.trim();
+      return input.trim() + '\n\r';
     },
 
     /**************
@@ -40,7 +39,7 @@ const TELNET = new Deva({
       const text = input.toString('utf8')
         .replace(/(<)(.+?)(>)/g, '[$2]') // replace angle brackets with square.
         .replace(ansireg, ''); // remove ansi colors.
-      console.log('PARSE STOP', text);
+
       return text;
     }
   },
