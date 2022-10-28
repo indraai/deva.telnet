@@ -1,5 +1,5 @@
 {
-  "name": "@feecting/telnetdeva",
+  "name": "@indra.ai/telnetdeva",
   "version": "0.0.10",
   "description": "The Telnet Deva",
   "main": "index.js",
@@ -20,7 +20,7 @@
     "url": "https://github.com/indraai/TelnetDeva/issues"
   },
   "dependencies": {
-    "@feecting/deva": "^1.0.25",
+    "@indra.ai/deva": "^1.0.25",
     "telnet-stream": "^1.0.5"
   },
   "homepage": "https://github.com/indraai/TelnetDeva#readme"

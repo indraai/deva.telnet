@@ -1,4 +1,6 @@
 // Copyright (c)2022 Quinn Michaels
+//  Telnet Deva
+
 const fs = require('fs');
 const path = require('path');
 const net = require('net');
@@ -7,7 +9,7 @@ const {TelnetSocket} = require('telnet-stream');
 const data_path = path.join(__dirname, 'data.json');
 const {agent,vars} = require(data_path).data;
 
-const Deva = require('@feecting/deva');
+const Deva = require('@indra.ai/deva');
 const TELNET = new Deva({
   agent: {
     uid: agent.uid,
