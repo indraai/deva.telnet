@@ -387,6 +387,7 @@ const TELNET = new Deva({
     describe: Return the help files for the Telnet Deva.
     ***************/
     help(packet) {
+      this.context('help');
       return new Promise((resolve, reject) => {
         this.help(packet.q.text, __dirname).then(help => {
           return this.question(`#feecting parse ${help}`);
