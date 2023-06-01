@@ -365,7 +365,7 @@ const TELNET = new Deva({
     ***************/
     uid(packet) {
       this.context('uid');
-      return Promise.resolve({text:this.uid()});
+      return Promise.resolve(this.uid());
     },
 
     /**************
@@ -375,7 +375,7 @@ const TELNET = new Deva({
     ***************/
     status(packet) {
       this.context('status');
-      return this.status();
+      return Promise.resolve(this.status());
     },
 
     /**************
