@@ -8,7 +8,7 @@ describe(telnet.me.name, () => {
   beforeEach(() => {
     return telnet.init()
   });
-  it('Check the SVARGA Object', () => {
+  it('Check the Deva Object', () => {
     expect(telnet).to.be.an('object');
     expect(telnet).to.have.property('me');
     expect(telnet).to.have.property('vars');

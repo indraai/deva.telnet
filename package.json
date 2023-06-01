@@ -1,4 +1,5 @@
 {
+  "id": 6329275100000,
   "name": "@indra.ai/telnetdeva",
   "version": "0.0.11",
   "description": "The Telnet Deva",
@@ -20,7 +21,7 @@
     "url": "https://github.com/indraai/TelnetDeva/issues"
   },
   "dependencies": {
-    "@indra.ai/deva": "^1.0.25",
+    "@indra.ai/deva": "^1.1.102",
     "telnet-stream": "^1.0.5"
   },
   "homepage": "https://github.com/indraai/TelnetDeva#readme"

@@ -4,10 +4,8 @@
   "copyright": "Copyright (c)2022 Quinn Michaels. All rights reserved.",
   "data": {
     "agent": {
-      "uid": "5743637646804",
+      "id": 6329275100000,
       "key": "telnet",
-      "name": "TELNET",
-      "describe": "Deva for Telnet Stuff",
       "prompt": {
         "emoji": "👾",
         "text": "telnet",
@@ -18,22 +16,22 @@
             "B": 55
           },
           "text": {
-            "R": 91,
-            "G": 247,
-            "B": 49
+            "R": 117,
+            "G": 244,
+            "B": 114
           }
         }
       },
-      "voice": {
-        "speech": "Alex",
-        "speed": 1
-      },
       "profile": {
+        "name": "Telnet Deva",
+        "describe": "Deva for Telnet Stuff",
         "emoji": "/public/devas/telnet/emoji.png",
         "avatar": "/public/devas/telnet/avatar.png",
         "background": "/assets/img/indra-background.jpg",
-        "describe": "Deva for Telnet Stuff",
-        "gender": "M"
+        "color": "#75f472",
+        "bgcolor": "#000000",
+        "gender": "M",
+        "voice": "Matthew"
       }
     },
     "vars": {
@@ -55,6 +53,15 @@
         "pending": "💬 PENDING",
         "noconnect": "❌ NOT CONNECTED",
         "clear": "!!!clear!!!"
+      },
+      "context": {
+        "open": "Telnet Deva is opening a connection",
+        "close": "Telnet Deva is closing a connection",
+        "writing": "Telnet Deva is writing data",
+        "cmd": "Telnet Deva is sending a command",
+        "uid": "Telnet Deva is creating a uid",
+        "status": "Telnet Deva is getting the status",
+        "help": "Telnet Deva is getting help"
       },
       "clearevent": "clearshell",
       "host": "127.0.0.1",

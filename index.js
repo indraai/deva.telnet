@@ -6,18 +6,30 @@ const path = require('path');
 const net = require('net');
 const {TelnetSocket} = require('telnet-stream');
 
+const package = require('./package.json');
+const info = {
+  id: package.id,
+  name: package.name,
+  describe: package.description,
+  version: package.version,
+  url: package.homepage,
+  git: package.repository.url,
+  bugs: package.bugs.url,
+  author: package.author,
+  license: package.license,
+  copyright: package.copyright,
+};
+
 const data_path = path.join(__dirname, 'data.json');
 const {agent,vars} = require(data_path).data;
 
 const Deva = require('@indra.ai/deva');
 const TELNET = new Deva({
   agent: {
+    info,
     uid: agent.uid,
     key: agent.key,
-    name: agent.name,
-    describe: agent.describe,
     prompt: agent.prompt,
-    voice: agent.voice,
     profile: agent.profile,
     translate(input) {
       return input.trim() + '\n\r';
@@ -301,6 +313,7 @@ const TELNET = new Deva({
     describe: Method relay to the open function.
     ***************/
     open(packet) {
+      this.context('open');
       return this.func.open(packet);
     },
 
@@ -310,6 +323,7 @@ const TELNET = new Deva({
     describe: Close a specific telnet connection.
     ***************/
     close(packet) {
+      this.context('close');
       const text = this.func.close(packet.q.text);
       return Promise.resolve({text});
     },
@@ -320,6 +334,7 @@ const TELNET = new Deva({
     describe: Method relay to the write function.
     ***************/
     write(packet) {
+      this.context('write');
       return this.func.write(packet);
     },
 
@@ -329,6 +344,7 @@ const TELNET = new Deva({
     describe: Shortcut method to the write function.
     ***************/
     '>'(packet) {
+      this.context('write');
       return this.func.write(packet);
     },
 
@@ -338,6 +354,7 @@ const TELNET = new Deva({
     describe: Method relay to the cmd function.
     ***************/
     cmd(packet) {
+      this.context('cmd');
       return this.func.cmd(packet);
     },
 
@@ -347,6 +364,7 @@ const TELNET = new Deva({
     describe: Return a unique id from the core module.
     ***************/
     uid(packet) {
+      this.context('uid');
       return Promise.resolve({text:this.uid()});
     },
 
@@ -356,6 +374,7 @@ const TELNET = new Deva({
     describe: Return the status for the Telnet Deva.
     ***************/
     status(packet) {
+      this.context('status');
       return this.status();
     },
 
@@ -366,7 +385,7 @@ const TELNET = new Deva({
     ***************/
     help(packet) {
       return new Promise((resolve, reject) => {
-        this.lib.help(packet.q.text, __dirname).then(help => {
+        this.help(packet.q.text, __dirname).then(help => {
           return this.question(`#feecting parse ${help}`);
         }).then(parsed => {
           return resolve({

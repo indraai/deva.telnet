@@ -1,11 +1,18 @@
-# Telnet Help
+image: ::agent_avatar::
+
+# Telnet Deva Help
 
 The Telnet Deva is for connecting to remote telnet hosts through the interface. There are a few commands you can use like 'open, close, write/>, cmd, uid, start, stop, status, and help'.
 
+id: ::agent_id::
+key: #::agent_key::
+name: ::agent_name::
+emoji: ::agent_emoji::
+describe: ::agent_describe::
 
 ## Open
 The 'oepn' command example:
-`#tel open:*name* *host*:*port*`
+`#telnet open:*name* *host*:*port*`
 
 The command is very simple in that it tells the Telnet Deva to open a command with the name at host and port number.
 
@@ -17,50 +24,55 @@ note: If *name* is blank it will use default 'telnet' for the connection name.
 ## Close
 This command will close the specific telnet connection that you have open.
 
-`#tel close *name*`
+`#telnet close *name*`
 
 
 ## Write
 Next we can write data to the Telnet connection
 
-`#tel write:*name* *string*`
-`#tel >:*name* *string*`
+`#telnet write:*name* *string*`
+`#telnet >:*name* *string*`
 
 
 ## Cmd
 This command will send a Telnet Command to the connection name.
 
-`#tel cmd:*name* *string*`
+`#telnet cmd:*name* *string*`
 
 
 ## Uid
 This command will return a system uid.
 
-`#tel uid`
+`#telnet uid`
 
 
 ## Start
 This command will start the Telnet Deva.
 
-`#tel start`
+`#telnet start`
 
 
 ## Stop
 This command will stop the Telnet Deva.
 
-`#tel stop`
+`#telnet stop`
 
 
 ## Status
 This command will return the Telnet Deva status.
 
-`#tel status`
+`#telnet status`
 
 
 ## Help
 This will show you this file obviously.
 
-`#tel help`
+`#telnet help`
 
-#color = var(--color-green)
-#bgcolor = var(--color-black)
+---
+
+#color = ::agent_color::
+#bgcolor = ::agent_bgcolor::
+#bg = ::agent_background::
+
+copyright: (c)2023 Quinn Michaels
