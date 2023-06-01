@@ -27,7 +27,7 @@
         "describe": "Deva for Telnet Stuff",
         "emoji": "/public/devas/telnet/emoji.png",
         "avatar": "/public/devas/telnet/avatar.png",
-        "background": "/assets/img/indra-background.jpg",
+        "background": "/public/devas/telnet/background.png",
         "color": "#75f472",
         "bgcolor": "#000000",
         "gender": "M",
