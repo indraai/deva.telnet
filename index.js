@@ -210,7 +210,7 @@ const TELNET = new Deva({
     onData(text, connection) {
       if (!text.length) return;
       this.func.state('data', connection);
-      text = this.agent.parse(text);
+      text = this._agent.parse(text);
       if (text === this.vars.messages.clear) return this.talk(this.vars.clearevent);
 
       const {relayEvent, pending} = this.modules[connection]
