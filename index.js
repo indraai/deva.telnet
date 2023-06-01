@@ -21,7 +21,7 @@ const info = {
 };
 
 const data_path = path.join(__dirname, 'data.json');
-const {agent,vars} = require(data_path).data;
+const {agent,vars} = require(data_path).DATA;
 
 const Deva = require('@indra.ai/deva');
 const TELNET = new Deva({
@@ -55,6 +55,9 @@ const TELNET = new Deva({
         .replace(ansireg, ''); // remove ansi colors.
 
       return text;
+    },
+    process(input) {
+      return input.trim();
     }
   },
   vars,

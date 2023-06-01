@@ -1,8 +1,11 @@
 {
   "id": 6329275100000,
   "name": "@indra.ai/telnetdeva",
+  "author": "Quinn Michaels",
   "version": "0.0.14",
-  "description": "The Telnet Deva",
+  "license": "MIT",
+  "copyright": "2023",
+  "description": "The Telnet Deva for using telnet services in deva.world.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,8 +18,6 @@
     "Telnet",
     "Deva"
   ],
-  "author": "Quinn Michaels",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/indraai/TelnetDeva/issues"
   },

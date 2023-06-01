@@ -2,7 +2,7 @@
   "name": "Telnet Deva Data File",
   "describe": "The main Data file for Telnet Deva",
   "copyright": "Copyright (c)2022 Quinn Michaels. All rights reserved.",
-  "data": {
+  "DATA": {
     "agent": {
       "id": 6329275100000,
       "key": "telnet",
@@ -30,7 +30,7 @@
         "background": "/public/devas/telnet/background.png",
         "color": "#75f472",
         "bgcolor": "#000000",
-        "gender": "M",
+        "gender": "deva",
         "voice": "Matthew"
       }
     },
