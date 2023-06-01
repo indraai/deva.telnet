@@ -1,7 +1,7 @@
 {
   "id": 6329275100000,
   "name": "@indra.ai/telnetdeva",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "The Telnet Deva",
   "main": "index.js",
   "scripts": {
