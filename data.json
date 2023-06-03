@@ -59,9 +59,12 @@
         "close": "Telnet Deva is closing a connection",
         "writing": "Telnet Deva is writing data",
         "cmd": "Telnet Deva is sending a command",
-        "uid": "Telnet Deva is creating a uid",
-        "status": "Telnet Deva is getting the status",
-        "help": "Telnet Deva is getting help"
+        "uid": "generating uid",
+        "status": "getting status",
+        "info": "getting info",
+        "feature": "accessing feature",
+        "issue": "has issues",
+        "help": "asking for help"
       },
       "clearevent": "clearshell",
       "host": "127.0.0.1",
