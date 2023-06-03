@@ -12,6 +12,7 @@ const info = {
   name: package.name,
   describe: package.description,
   version: package.version,
+  dir: __dirname,
   url: package.homepage,
   git: package.repository.url,
   bugs: package.bugs.url,
@@ -25,12 +26,10 @@ const {agent,vars} = require(data_path).DATA;
 
 const Deva = require('@indra.ai/deva');
 const TELNET = new Deva({
-  agent: {
-    info,
-    uid: agent.uid,
-    key: agent.key,
-    prompt: agent.prompt,
-    profile: agent.profile,
+  info,
+  agent,
+  vars,
+  utils: {
     translate(input) {
       return input.trim() + '\n\r';
     },
@@ -60,8 +59,6 @@ const TELNET = new Deva({
       return input.trim();
     }
   },
-  vars,
-  deva: {},
   listeners: {},
   modules: {},
   func: {
@@ -210,7 +207,7 @@ const TELNET = new Deva({
     onData(text, connection) {
       if (!text.length) return;
       this.func.state('data', connection);
-      text = this._agent.parse(text);
+      text = this.utils.parse(text);
       if (text === this.vars.messages.clear) return this.talk(this.vars.clearevent);
 
       const {relayEvent, pending} = this.modules[connection]
@@ -362,44 +359,24 @@ const TELNET = new Deva({
     },
 
     /**************
-    method: uid
+    method: issue
     params: packet
-    describe: Return a unique id from the core module.
+    describe: create a new issue for the main deva.world through github agent.
     ***************/
-    uid(packet) {
-      this.context('uid');
-      return Promise.resolve(this.uid());
-    },
-
-    /**************
-    method: status
-    params: packet
-    describe: Return the status for the Telnet Deva.
-    ***************/
-    status(packet) {
-      this.context('status');
-      return Promise.resolve(this.status());
-    },
-
-    /**************
-    method: help
-    params: packet
-    describe: Return the help files for the Telnet Deva.
-    ***************/
-    help(packet) {
-      this.context('help');
+    issue(packet) {
+      const agent = this.agent();
       return new Promise((resolve, reject) => {
-        this.help(packet.q.text, __dirname).then(help => {
-          return this.question(`#feecting parse ${help}`);
-        }).then(parsed => {
+        this.question(`#github issue:${agent.key} ${packet.q.text}`).then(issue => {
           return resolve({
-            text: parsed.a.text,
-            html: parsed.a.html,
-            data: parsed.a.data,
-          });
-        }).catch(reject);
+            text: issue.a.text,
+            html: issue.a.html,
+            data: issue.a.data,
+          })
+        }).catch(err => {
+          return this.error(err, packet, reject);
+        });
       });
-    }
+    },
   },
 });
 module.exports = TELNET
