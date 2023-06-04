@@ -82,15 +82,14 @@ const TELNET = new Deva({
     open(packet) {
       const {id, q, created} = packet;
       // so here we need a name which is going to be param 1
-      const parts = q.text.split(' ');
-      const conn = parts[0].split(':');
+      const conn = q.text.split(':');
 
-      this.prompt(`OPEN:${q.meta.params[1]} ${q.text}`);
-      console.log('CONN', conn);
-
+      const relayEvent = q.data.relay || false;
+      console.log('OPEN PACKET', relayEvent);
+      this.prompt(`${relayEvent}:${q.meta.params[1]} ${q.text}`);
       const connection = q.meta.params[1] ? q.meta.params[1] : this.vars.connection
       this.modules[connection] = {
-        relayEvent: parts[1] || false,
+        relayEvent,
         host: conn[0] || false,
         port: conn[1] || false,
         timeout: conn[2] || this.vars.timeout,
@@ -143,8 +142,8 @@ const TELNET = new Deva({
           this.func.state('error', connection);
           this.talk('error', {
             id: this.uid(),
-            client: this.client,
-            agent: this.agent,
+            client: this.client(),
+            agent: this.agent(),
             error: e.toString(),
             created: Date.now(),
           });
@@ -175,12 +174,13 @@ const TELNET = new Deva({
     write(packet) {
       const {text,meta} = packet.q;
       if (meta.params[1]) this.vars.connection = meta.params[1];
+      console.log('THIS CONNECTION', this.vars.connection);
       const conn = this.modules[this.vars.connection].telnet
 
       return new Promise((resolve, reject) => {
         if (!this.modules[this.vars.connection]) return resolve(this.vars.messages.noconnect);
         this.func.state('write', this.vars.connection);
-        conn.write(this.agent.translate(text), () => {
+        conn.write(this.utils.translate(text), () => {
           this.modules[this.vars.connection].pending = packet.q;
           this.func.state('pending', this.vars.connection);
           return resolve();
@@ -206,6 +206,8 @@ const TELNET = new Deva({
     ***************/
     onData(text, connection) {
       if (!text.length) return;
+      const agent = this.agent();
+      const client = this.client();
       this.func.state('data', connection);
       text = this.utils.parse(text);
       if (text === this.vars.messages.clear) return this.talk(this.vars.clearevent);
@@ -219,10 +221,10 @@ const TELNET = new Deva({
         id: this.uid(),
         q: pending,
         a: {
-          client:this.client,
-          agent: this.agent,
+          client,
+          agent,
           meta: {
-            key: this.agent.key,
+            key: agent.key,
             method: 'data',
             connection,
           },
@@ -248,6 +250,8 @@ const TELNET = new Deva({
     for the overall DEVA. This is for specific connections only.
     ***************/
     onError(err, connection) {
+      const agent = this.agent();
+      const client = this.client();
       this.func.state('error', connection);
       const {relayEvent, pending} = this.modules[connection]
       const {dataEvent} = this.vars;
@@ -256,10 +260,10 @@ const TELNET = new Deva({
         id: this.uid(),
         q: pending,
         a: {
-          client:this.client,
-          agent: this.agent,
+          client,
+          agent,
           meta: {
-            key: this.agent.key,
+            key: agent.key,
             method: 'error',
           },
           text: err.toString('utf8'),
@@ -272,8 +276,8 @@ const TELNET = new Deva({
 
       this.talk('error', {
         id: this.uid(),
-        agent: this.agent,
-        client: this.cleint,
+        agent,
+        client,
         error: err.toString(),
         created: Date.now()
       })
