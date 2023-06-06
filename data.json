@@ -55,10 +55,10 @@
         "clear": "!!!clear!!!"
       },
       "context": {
-        "open": "Telnet Deva is opening a connection",
-        "close": "Telnet Deva is closing a connection",
-        "writing": "Telnet Deva is writing data",
-        "cmd": "Telnet Deva is sending a command",
+        "open": "opening connection",
+        "close": "closing connection",
+        "writing": "writing data",
+        "cmd": "sending a command",
         "uid": "generating uid",
         "status": "getting status",
         "info": "getting info",
