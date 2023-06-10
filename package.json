@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/indraai/TelnetDeva#readme",
   "devDependencies": {
-    "@indra.ai/deva": "^1.1.121"
+    "@indra.ai/deva": "^1.1.122"
   }
 }
