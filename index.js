@@ -1,30 +1,32 @@
 // Copyright (c)2022 Quinn Michaels
 //  Telnet Deva
 
-const fs = require('fs');
-const path = require('path');
-const net = require('net');
-const {TelnetSocket} = require('telnet-stream');
+import Deva from '@indra.ai/deva';
+import pkg from './package.json' with {type:'json'};
+const {agent,vars} = pkg.data;
 
-const package = require('./package.json');
+// set the __dirname
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';    
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+import net from 'node:net';
+import {TelnetSocket} from 'telnet-stream';
+
 const info = {
-  id: package.id,
-  name: package.name,
-  describe: package.description,
-  version: package.version,
+  id: pkg.id,
+  name: pkg.name,
+  describe: pkg.description,
+  version: pkg.version,
   dir: __dirname,
-  url: package.homepage,
-  git: package.repository.url,
-  bugs: package.bugs.url,
-  author: package.author,
-  license: package.license,
-  copyright: package.copyright,
+  url: pkg.homepage,
+  git: pkg.repository.url,
+  bugs: pkg.bugs.url,
+  author: pkg.author,
+  license: pkg.license,
+  copyright: pkg.copyright,
 };
 
-const data_path = path.join(__dirname, 'data.json');
-const {agent,vars} = require(data_path).DATA;
-
-const Deva = require('@indra.ai/deva');
 const TELNET = new Deva({
   info,
   agent,
@@ -383,5 +385,14 @@ const TELNET = new Deva({
       });
     },
   },
+  onReady(data, resolve) {
+    this.prompt(this.vars.messages.ready);
+    return resolve(data);
+  },
+  onError(err, data, reject) {
+    this.prompt(this.vars.messages.error);
+    console.log(err);
+    return reject(err);
+  },
 });
-module.exports = TELNET
+export default TELNET

@@ -1,31 +1,174 @@
 {
   "id": 6329275100000,
-  "name": "@indra.ai/telnetdeva",
+  "name": "@indra.ai/deva.telnet",
   "author": "Quinn Michaels",
   "version": "0.0.24",
   "license": "MIT",
-  "copyright": "2023",
+  "copyright": "(c)2025 Quinn Michaels; All rights reserved;",
   "description": "The Telnet Deva for using telnet services in deva.world.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/indraai/TelnetDeva.git"
+    "url": "git+ssh://git@github.com/indraai/deva.telnet.git"
   },
   "keywords": [
     "Telnet",
     "Deva"
   ],
   "bugs": {
-    "url": "https://github.com/indraai/TelnetDeva/issues"
+    "url": "https://github.com/indraai/deva.telnet/issues"
   },
   "dependencies": {
+    "@indra.ai/deva": "^1.5.35",
     "telnet-stream": "^1.0.5"
   },
-  "homepage": "https://github.com/indraai/TelnetDeva#readme",
-  "devDependencies": {
-    "@indra.ai/deva": "^1.1.122"
+  "homepage": "https://github.com/indraai/deva.telnet#readme",
+  "data": {
+    "agent": {
+      "id": 6329275100000,
+      "key": "telnet",
+      "prompt": {
+        "emoji": "👾",
+        "text": "Telnet",
+        "colors": {
+          "label": {
+            "R": 58,
+            "G": 177,
+            "B": 55
+          },
+          "text": {
+            "R": 117,
+            "G": 244,
+            "B": 114
+          }
+        }
+      },
+      "profile": {
+        "name": "#deva.telnet",
+        "title": "Telnet Deva",
+        "subtitle": "Connecting the telnet space",
+        "describe": "Deva for Telnet Stuff",
+        "tweet": "Deva for Telnet Stuff",
+        "hashtags": "QuinnMichaels,IndraAI,DevaWorld,deva.telnet",
+        "pronouns": "He, Him",
+        "gender": "DEVA",
+        "style": "Network Illustrator",
+        "voice": "onyx",
+        "system": "Deva.world.telnet",
+        "layout": "default",
+        "color": "rgb(117,244,114)",
+        "bgcolor": "rgb(0,0,0)",
+        "emoji": "/assets/devas/telnet/emoji.png",
+        "avatar": "/assets/devas/telnet/avatar.png",
+        "image": "/assets/devas/telnet/image.png",
+        "background": "/assets/devas/telnet/background.png",
+        "owner": "Quinn Michaels",
+        "creator": "Quinn Michaels",
+        "created": "Aug 21, 2022 @ 3:29AM PST"
+      }
+    },
+    "vars": {
+      "messages": {
+        "init": "🟠 INIT",
+        "start": "🔵 START",
+        "enter": "🟢 ENTER",
+        "stop": "🔴 STOP",
+        "exit": "🟡 EXIT",
+        "done": "🟣 DONE",
+        "error": "💣 ERROR!",
+        "ready": "⭐️ READY!",
+        "connect": "🤝 CONNECT",
+        "timeout": "⏲ TIMEOUT",
+        "end": "🎬 END",
+        "close": "💩 CLOSED",
+        "destroy": "💩 DESTROYED",
+        "write": "🖋 SENDING",
+        "receiving": "📲 RECEIVING",
+        "pending": "💬 PENDING",
+        "noconnect": "❌ NOT CONNECTED",
+        "clear": "!!!clear!!!"
+      },
+      "context": {
+        "open": "opening connection",
+        "close": "closing connection",
+        "writing": "writing data",
+        "cmd": "sending a command",
+        "uid": "generating uid",
+        "status": "getting status",
+        "info": "getting info",
+        "feature": "accessing feature",
+        "issue": "has issues",
+        "help": "asking for help"
+      },
+      "clearevent": "clearshell",
+      "host": "127.0.0.1",
+      "port": 9999,
+      "timeout": 1800000,
+      "state": "IDLE",
+      "dataEvent": "socket:terminal",
+      "relayEvent": false,
+      "pending": false,
+      "connection": "telnet",
+      "states": {
+        "idle": "IDLE",
+        "conecting": "CONNECTING",
+        "connected": "CONNECTED",
+        "error": "ERROR",
+        "close": "CLOSED",
+        "pending": "PENDING",
+        "data": "DATA",
+        "write": "WRITE",
+        "done": "DONE"
+      },
+      "commands": {
+        "SE": 240,
+        "NOP": 241,
+        "DATA_MARK": 242,
+        "BREAK": 243,
+        "INTERRUPT_PROCESS": 244,
+        "ABORT_OUTPUT": 245,
+        "ARE_YOU_THERE": 246,
+        "ERASE_CHARACTER": 247,
+        "ERASE_LINE": 248,
+        "GO_AHEAD": 249,
+        "SB": 250,
+        "WILL": 251,
+        "WONT": 252,
+        "DO": 253,
+        "DONT": 254,
+        "IAC": 255,
+        "TERMINAL_SPEED": 32
+      },
+      "options": {
+        "OPT_BINARY": 0,
+        "OPT_ECHO": 1,
+        "OPT_SGA": 3,
+        "OPT_TT": 24,
+        "OPT_LINEMODE": 34,
+        "OPT_NEO": 39,
+        "OPT_EXOPL": 255
+      },
+      "mud_options": {
+        "MSSP": 70,
+        "MCCP": 85,
+        "MCCP2": 86,
+        "MSP": 90,
+        "MXP": 91
+      },
+      "mssp": {
+        "VAR": 1,
+        "VAL": 2
+      },
+      "control_codes": {},
+      "new_lines": {
+        "CR": 13,
+        "LF": 10,
+        "NULL": 0
+      }
+    }
   }
 }
