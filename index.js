@@ -143,7 +143,7 @@ const TELNET = new Deva({
           console.error(e);
           this.func.state('error', connection);
           this.talk('error', {
-            id: this.uid(),
+            id: this.lib.uid(),
             client: this.client(),
             agent: this.agent(),
             error: e.toString(),
@@ -221,7 +221,7 @@ const TELNET = new Deva({
 
       if (!relayEvent) this.prompt(text);
       this.talk(theEvent, {
-        id: this.uid(),
+        id: this.lib.uid(),
         q: pending,
         a: {
           client,
@@ -260,7 +260,7 @@ const TELNET = new Deva({
       const {dataEvent} = this.vars;
       const theEvent = relayEvent || dataEvent;
       this.talk(theEvent, {
-        id: this.uid(),
+        id: this.lib.uid(),
         q: pending,
         a: {
           client,
@@ -278,7 +278,7 @@ const TELNET = new Deva({
       this.vars.pending = false;
 
       this.talk('error', {
-        id: this.uid(),
+        id: this.lib.uid(),
         agent,
         client,
         error: err.toString(),
@@ -364,26 +364,7 @@ const TELNET = new Deva({
       this.context('cmd');
       return this.func.cmd(packet);
     },
-
-    /**************
-    method: issue
-    params: packet
-    describe: create a new issue for the main deva.world through github agent.
-    ***************/
-    issue(packet) {
-      const agent = this.agent();
-      return new Promise((resolve, reject) => {
-        this.question(`#github issue:${agent.key} ${packet.q.text}`).then(issue => {
-          return resolve({
-            text: issue.a.text,
-            html: issue.a.html,
-            data: issue.a.data,
-          })
-        }).catch(err => {
-          return this.error(err, packet, reject);
-        });
-      });
-    },
+    
   },
   onReady(data, resolve) {
     this.prompt(this.vars.messages.ready);

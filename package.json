@@ -23,7 +23,7 @@
     "url": "https://github.com/indraai/deva.telnet/issues"
   },
   "dependencies": {
-    "@indra.ai/deva": "^1.5.35",
+    "@indra.ai/deva": "^1.5.37",
     "telnet-stream": "^1.0.5"
   },
   "homepage": "https://github.com/indraai/deva.telnet#readme",
@@ -48,7 +48,8 @@
         }
       },
       "profile": {
-        "name": "#deva.telnet",
+        "name": "Telnet Deva",
+        "hashtag": "#TelnetDeva",
         "title": "Telnet Deva",
         "subtitle": "Connecting the telnet space",
         "describe": "Deva for Telnet Stuff",
@@ -103,6 +104,12 @@
         "feature": "accessing feature",
         "issue": "has issues",
         "help": "asking for help"
+      },
+      "ask": {
+        "history": []
+      },
+      "art": {
+        "history": []
       },
       "clearevent": "clearshell",
       "host": "127.0.0.1",

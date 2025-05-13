@@ -3,22 +3,7 @@
 
 {{profile}}
 
-p: {{profile.name}} is for connecting to remote telnet hosts through the interface. There are a few commands you can use like 'open, close, write/>, cmd, uid, start, stop, status, and help'.
-
-## Features
-
-### security
-p: The local #security feature available to {{profile.name}}.
-cmd:#{{agent.key}} security
-
-### support
-p: The local #support feature available to {{profile.name}}.
-cmd:#{{agent.key}} support
-
-### services
-p: The local #services feature available to {{profile.name}}.
-cmd:#{{agent.key}} services
-
+p: {{profile.name}} is for connecting to remote telnet hosts through the interface. There are a few commands you can use like open, close, write, cmd, uid, start, stop, status, and help.
 
 ## Methods
 
@@ -42,22 +27,6 @@ example: #telnet >:[name] [string]
 ### cmd
 p: This command will send a Telnet Command to the connection name.
 example: #telnet cmd:[name] [string]
-
-### uid
-p:Generate a unique id from the {{profile.name}}.
-cmd:#{{agent.key}} uid
-
-### status
-p:Return the status for the {{profile.name}}.
-cmd:#{{agent.key}} status
-
-### issue
-p: Create an issue associated with {{profile.name}} source code repository.
-tty:#{{agent.key}} issue [title of issue]
-
-### help
-p:Get help using the {{profile.name}}
-cmd:#{{agent.key}} help
 
 ---
 
