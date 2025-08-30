@@ -2,7 +2,7 @@
   "id": 6329275100000,
   "name": "@indra.ai/deva.telnet",
   "author": "Quinn Michaels",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "license": "MIT",
   "copyright": "(c)2025 Quinn Michaels; All rights reserved;",
   "description": "The Telnet Deva for using telnet services in deva.world.",
